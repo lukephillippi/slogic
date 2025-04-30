@@ -10,7 +10,7 @@ import (
 )
 
 // IfMessageEquals returns a [slogic.Filter] that returns true if
-// the record's Message is equivalent to the given message.
+// the record's Message is equivalent the given message.
 func IfMessageEquals(message string) slogic.Filter {
 	return func(_ context.Context, r slog.Record) bool {
 		return r.Message == message
