@@ -1,4 +1,6 @@
 // Package slogic provides composable filtering logic for [log/slog].
+//
+// The [go.luke.ph/slogic/filter] package provides a set of useful [Filter] implementations.
 package slogic // import "go.luke.ph/slogic"
 
 import (
