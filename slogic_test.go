@@ -2,6 +2,7 @@ package slogic
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"log/slog"
 	"testing"
@@ -12,6 +13,7 @@ func TestHandler(t *testing.T) {
 	var buf bytes.Buffer
 	h := NewHandler(
 		slog.NewJSONHandler(&buf, nil),
+		mockFilter(false),
 	)
 
 	results := func() []map[string]any {
@@ -32,5 +34,11 @@ func TestHandler(t *testing.T) {
 	err := slogtest.TestHandler(h, results)
 	if err != nil {
 		t.Fatal(err)
+	}
+}
+
+func mockFilter(result bool) Filter {
+	return func(ctx context.Context, r slog.Record) bool {
+		return result
 	}
 }
