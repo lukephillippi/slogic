@@ -2,6 +2,8 @@
 
 🧠 _Composable filtering logic for [`log/slog`](https://pkg.go.dev/log/slog)_
 
+[![Test](https://github.com/lukephillippi/slogic/actions/workflows/test.yaml/badge.svg)](https://github.com/lukephillippi/slogic/actions/workflows/test.yaml)
+
 ## License
 
 The package is released under [the Unlicense license](./LICENSE.md).
