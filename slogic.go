@@ -58,3 +58,36 @@ func (h *Handler) WithGroup(name string) slog.Handler {
 		filter:  h.filter,
 	}
 }
+
+// And combines multiple filters into a single [Filter]
+// that returns true if ALL of the given filters return true.
+func And(filters ...Filter) Filter {
+	return func(ctx context.Context, r slog.Record) bool {
+		for _, filter := range filters {
+			if !filter(ctx, r) {
+				return false
+			}
+		}
+		return true
+	}
+}
+
+// Or combines multiple filters into a single [Filter]
+// that returns true if ANY of the given filters return true.
+func Or(filters ...Filter) Filter {
+	return func(ctx context.Context, r slog.Record) bool {
+		for _, filter := range filters {
+			if filter(ctx, r) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
+// Not returns a [Filter] that negates the result of the given filter.
+func Not(filter Filter) Filter {
+	return func(ctx context.Context, r slog.Record) bool {
+		return !filter(ctx, r)
+	}
+}
