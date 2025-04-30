@@ -10,7 +10,7 @@ import (
 )
 
 // IfAttrEquals returns a [slogic.Filter] that returns true if
-// the record's [slog.Attr] with the given key equals the given value.
+// the record's [slog.Attr] with the given key is equivalent to the given value.
 func IfAttrEquals(key string, value any) slogic.Filter {
 	return ifAttr(key, func(attr slog.Attr) bool {
 		return attr.Value.Equal(slog.AnyValue(value))
