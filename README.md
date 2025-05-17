@@ -43,7 +43,7 @@ Combine these with logical operators (`And`, `Or`, `Not`) to create sophisticate
 // 2. Keep latency WARN logs
 // 3. Filter all other ≤ WARN logs
 handler := slogic.NewHandler(
-    slog.NewTextHandler(os.Stdout, opts),
+    slog.NewTextHandler(os.Stdout, nil),
     slogic.And(
         slogic.Not(
             slogic.Or(
@@ -57,6 +57,8 @@ handler := slogic.NewHandler(
         filter.IfLevelAtMost(slog.LevelWarn),
     ),
 )
+
+slog.SetDefault(slog.New(handler))
 ```
 
 ## License
